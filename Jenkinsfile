@@ -13,16 +13,14 @@ pipeline {
         }
         stage("Static code analysis") {
             steps {
-                step("check"){
-                   sh "./gradlew checkstyleMain"
-                }
-                step("publish"){
-                    publishHTML (target:[
-                        reportDir: 'build/reports/checkstyle/',
-                        reportFiles: 'main.html',
-                        reportName: 'Checkstyle Report'
-                    ])
-                }
+                 sh "./gradlew checkstyleMain"
+            }
+            steps {
+                  publishHTML (target:[
+                      reportDir: 'build/reports/checkstyle/',
+                      reportFiles: 'main.html',
+                      reportName: 'Checkstyle Report'
+                  ])
             }
         }
         stage("Code coverage") {
